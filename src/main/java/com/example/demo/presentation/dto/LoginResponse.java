@@ -7,14 +7,14 @@ public record LoginResponse(
         Boolean isNew
 ) {
 
-    public static LoginResponse logIn(Member member) {
+    public static LoginResponse logIn(final Member member) {
         return new LoginResponse(
                 member.getId(),
                 false
         );
     }
 
-    public static LoginResponse signUp(Member member) {
+    public static LoginResponse signUp(final Member member) {
         return new LoginResponse(
                 member.getId(),
                 true

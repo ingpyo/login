@@ -19,4 +19,4 @@ spring:
       ddl-auto: create
   config:
     import:
-      - classpath:/loginSecurity/application.yml
+      - classpath:loginSecurity/application.yml
