@@ -24,8 +24,8 @@ public class KakaoOauth2Client implements Oauth2Client {
     }
 
     @Override
-    public String requestToken(final String redirect_uri, final String authCode) {
-        return tokenClient.request(redirect_uri, authCode);
+    public String requestToken(final String authCode) {
+        return tokenClient.request(authCode);
     }
 
     @Override

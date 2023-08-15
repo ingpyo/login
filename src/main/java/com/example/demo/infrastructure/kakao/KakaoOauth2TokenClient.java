@@ -21,14 +21,17 @@ public class KakaoOauth2TokenClient {
 
     private final String kakaoClientId;
     private final String kakaoClientSecret;
+    private final String kakaoRedirectUri;
     private final WebClient webClient;
 
     public KakaoOauth2TokenClient(
             @Value("${kakao.client-id}") String kakaoClientId,
-            @Value("${kakao.client_secret}") String kakaoClientSecret
+            @Value("${kakao.client-secret}") String kakaoClientSecret,
+            @Value("${kakao.redirect-uri}")String kakaoRedirectUri
     ) {
         this.kakaoClientId = kakaoClientId;
         this.kakaoClientSecret = kakaoClientSecret;
+        this.kakaoRedirectUri = kakaoRedirectUri;
         this.webClient = WebClient.create();
     }
 
@@ -41,10 +44,10 @@ public class KakaoOauth2TokenClient {
                 .toUriString();
     }
 
-    public String request(final String redirect_uri,final String authCode) {
+    public String request(final String authCode) {
         final BodyInserters.FormInserter<String> bodyForm = BodyInserters.fromFormData("grant_type", GRANT_TYPE)
                 .with("client_id", kakaoClientId)
-                .with("redirect_uri", redirect_uri)
+                .with("redirect_uri", kakaoRedirectUri)
                 .with("code", authCode)
                 .with("client_secret", kakaoClientSecret);
 

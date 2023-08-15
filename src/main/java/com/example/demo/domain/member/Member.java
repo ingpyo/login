@@ -1,6 +1,7 @@
 package com.example.demo.domain.member;
 
 import com.example.demo.domain.SocialType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 
 @Getter
+@Entity
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +32,9 @@ public class Member {
         this.socialType = socialType;
         this.nickname = nickname;
         this.profileImage = profileImage;
+    }
+
+    public Member() {
+
     }
 }

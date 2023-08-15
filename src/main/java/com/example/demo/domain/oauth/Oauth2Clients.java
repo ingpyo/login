@@ -23,14 +23,14 @@ public class Oauth2Clients {
         return client.createRedirectUri(redirectUri);
     }
 
-    public UserInfo requestUserInfo(final SocialType socialType, final String redirect_uri, final String code) {
+    public UserInfo requestUserInfo(final SocialType socialType, final String code) {
         Oauth2Client client = getClient(socialType);
-        String accessToken = client.requestToken(redirect_uri, code);
+        String accessToken = client.requestToken(code);
         return client.requestUserInfo(accessToken);
     }
 
     private Oauth2Client getClient(SocialType socialType) {
         return Optional.ofNullable(clients.get(socialType))
-            .orElseThrow(() -> new IllegalArgumentException("해당 OAuth2 제공자는 지원되지 않습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 OAuth2 제공자는 지원되지 않습니다."));
     }
 }

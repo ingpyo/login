@@ -1,5 +1,6 @@
 package com.example.demo.application;
 
+import com.example.demo.domain.SocialType;
 import com.example.demo.domain.oauth.dto.UserInfo;
 import com.example.demo.domain.member.Member;
 import com.example.demo.domain.member.MemberRepository;
@@ -24,11 +25,10 @@ public class OAuthService {
         return oauth2Clients.redirectUri(request.socialType(), request.redirectUri());
     }
 
-    public LoginResponse login(final LoginRequest request) {
+    public LoginResponse login(final SocialType socialType,final String code) {
         final UserInfo userInfo = oauth2Clients.requestUserInfo(
-                request.socialType(),
-                request.redirect_uri(),
-                request.authCode()
+                socialType,
+                code
         );
 
         return memberRepository.findBySocialIdAndSocialType(userInfo.socialId(), userInfo.socialType())
