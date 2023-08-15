@@ -1,5 +1,6 @@
 package com.example.demo.domain.token;
 
+import com.example.demo.domain.member.Member;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +10,6 @@ import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.donggle.backend.domain.member.Member;
 
 import java.util.Objects;
 
