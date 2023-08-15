@@ -5,9 +5,7 @@ import com.example.demo.domain.oauth.dto.UserInfo;
 import com.example.demo.domain.member.Member;
 import com.example.demo.domain.member.MemberRepository;
 import com.example.demo.domain.oauth.Oauth2Clients;
-import com.example.demo.presentation.dto.LoginRequest;
 import com.example.demo.presentation.dto.LoginResponse;
-import com.example.demo.presentation.dto.RedirectUriRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,14 +19,15 @@ public class OAuthService {
         this.memberRepository = memberRepository;
     }
 
-    public String createAuthorizeRedirectUri(final RedirectUriRequest request) {
-        return oauth2Clients.redirectUri(request.socialType(), request.redirectUri());
+    public String createAuthorizeRedirectUri(final SocialType socialType, final String redirectUri) {
+        return oauth2Clients.redirectUri(socialType, redirectUri);
     }
 
-    public LoginResponse login(final SocialType socialType,final String code) {
+    public LoginResponse login(final SocialType socialType,final String code,final String redirectUri) {
         final UserInfo userInfo = oauth2Clients.requestUserInfo(
                 socialType,
-                code
+                code,
+                redirectUri
         );
 
         return memberRepository.findBySocialIdAndSocialType(userInfo.socialId(), userInfo.socialType())

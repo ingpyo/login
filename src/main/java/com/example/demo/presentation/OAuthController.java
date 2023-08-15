@@ -28,9 +28,9 @@ public class OAuthController {
 
     private final OAuthService oathService;
 
-    @PostMapping("/{socialType}")
-    public ResponseEntity<Void> oathRedirectUri(@RequestBody final RedirectUriRequest request, HttpServletResponse response) throws IOException {
-        final String authorizeRedirectUri = oathService.createAuthorizeRedirectUri(request);
+    @GetMapping("/{socialType}")
+    public ResponseEntity<Void> oathRedirectUri(@PathVariable SocialType socialType,@RequestParam final String redirectUri, HttpServletResponse response) throws IOException {
+        final String authorizeRedirectUri = oathService.createAuthorizeRedirectUri(socialType, redirectUri);
         response.sendRedirect(authorizeRedirectUri);
         return ResponseEntity.ok().build();
     }
@@ -38,9 +38,10 @@ public class OAuthController {
     @GetMapping("/login/{socialType}")
     ResponseEntity<LoginResponse> login(
             @PathVariable SocialType socialType,
-            @RequestParam("code") String code
+            @RequestParam("code") String code,
+            @RequestParam("redirectUri") String redirectUri
     ) {
-        LoginResponse response = oathService.login(socialType, code);
+        LoginResponse response = oathService.login(socialType, code,redirectUri);
         return ResponseEntity.ok(response);
     }
 }

@@ -6,7 +6,7 @@ import com.example.demo.domain.SocialType;
 public interface Oauth2Client {
     String createRedirectUri(final String redirectUri);
 
-    String requestToken(final String authCode);
+    String requestToken(final String authCode, final String redirectUri);
 
     UserInfo requestUserInfo(final String accessToken);
 

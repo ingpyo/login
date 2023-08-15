@@ -23,9 +23,9 @@ public class Oauth2Clients {
         return client.createRedirectUri(redirectUri);
     }
 
-    public UserInfo requestUserInfo(final SocialType socialType, final String code) {
+    public UserInfo requestUserInfo(final SocialType socialType, final String code, final String redirectUri) {
         Oauth2Client client = getClient(socialType);
-        String accessToken = client.requestToken(code);
+        String accessToken = client.requestToken(code, redirectUri);
         return client.requestUserInfo(accessToken);
     }
 

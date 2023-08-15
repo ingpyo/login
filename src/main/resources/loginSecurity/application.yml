@@ -1,0 +1,4 @@
+kakao:
+  client-id: '6ca59d0f24329dc5c4df83455b6919c8'
+  client-secret: 'rr8sLpYfIjAFhqLTI0PyboTOPhyYzfm5'
+  redirect-uri: 'http://localhost:8080/oauth/kakao/redirect'
